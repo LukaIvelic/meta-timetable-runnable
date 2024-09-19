@@ -1,0 +1,282 @@
+﻿<UserControl x:Class="Meta.View.UserControl1"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Meta.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="1050" d:DesignWidth="1500">
+    <UserControl.Resources>
+
+        <!--#region Textbox 1-->
+        <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
+        <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#4b4b4b"/>
+        <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#1f1f1f"/>
+        <Style x:Key="TextboxInputUC1" TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Padding" Value="5,1,1,1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True" CornerRadius="5">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                        <Condition Property="IsSelectionActive" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+        <!--#endregion-->
+
+        <!--#region Label Format-->
+        <Style x:Key="LabelStyleUC1" TargetType="{x:Type Label}">
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Label}">
+                        <Border Background="Transparent" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="0" SnapsToDevicePixels="true" CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--#endregion-->
+
+        <!--#region Image Button-->
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#C0C0C0"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#C0C0C0"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#A9A9A9"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#A9A9A9"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#808080"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#808080"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="ImageButton" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Margin" Value="0,0,10,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true" CornerRadius="7.5">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--#endregion-->
+
+        <!--#region ComboBox-->
+        
+        <!--#endregion-->
+    </UserControl.Resources>
+
+    <Grid Background="White" Margin="50">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.RowSpan="4" Grid.ColumnSpan="4" BorderBrush="Transparent" BorderThickness="1"/>
+
+        <Grid Grid.Row="0" Grid.Column="0"  Background="Transparent">
+            <TextBlock Text="Create reminder" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="25" FontWeight="SemiBold"/>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,0" VerticalAlignment="Stretch">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25" MaxHeight="40"/>
+                <RowDefinition MaxHeight="120"/>
+                <RowDefinition MaxHeight="120"/>
+                <RowDefinition MaxHeight="120"/>
+                <RowDefinition MaxHeight="120"/>
+                <RowDefinition MaxHeight="120"/>
+                <RowDefinition MaxHeight="120"/>
+                <RowDefinition Height="25"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="350"/>
+                <ColumnDefinition Width="350"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="25"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Row="1" Grid.Column="1">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Name="DateStackPanel">
+                    <TextBlock Text="Schedule a date" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="17" FontWeight="SemiBold" Margin="0,0,0,0" Padding="10" TextAlignment="Left"/>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Row="1" Grid.Column="2">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Name="TimeStackPanel">
+                    <TextBlock Text="Set the time" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="17" FontWeight="SemiBold" Margin="0,0,0,0" Padding="10" TextAlignment="Left"/>
+                </StackPanel>
+            </Grid>
+
+
+            <Grid Grid.Row="2" Grid.Column="1">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <TextBlock Text="Make a title" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="17" FontWeight="SemiBold" Margin="0,0,0,0" Padding="10" TextAlignment="Left"/>
+                    <TextBox Style="{DynamicResource TextboxInputUC1}" Width="300" Height="40" HorizontalAlignment="Left" Margin="0,0,0,0" FontSize="18" VerticalContentAlignment="Center"  Uid="Title"
+                             Text="{Binding Path=ReminderTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" PreviewKeyUp="Update" x:Name="ReminderTitle"></TextBox>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Row="2" Grid.Column="2" Grid.RowSpan="2">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <TextBlock Text="{Binding LeftOverChars}" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="17" FontWeight="SemiBold" Margin="0,0,0,0" Padding="10" TextAlignment="Left" Name="TextBlockDescription"/>
+                    <TextBox Style="{DynamicResource TextboxInputUC1}" Width="300" Height="127" HorizontalAlignment="Left" Margin="0,0,0,0" FontSize="18" VerticalContentAlignment="Top" Padding="5" Uid="Description"
+                             TextWrapping="Wrap" AcceptsReturn="True" TextAlignment="Justify" PreviewKeyUp="Update" Name="ReminderDescription"></TextBox>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2">
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal" Margin="50,30,0,0">
+                    <CheckBox VerticalAlignment="Center" Margin="0,2.5,0,0" FontSize="15" VerticalContentAlignment="Center" Name="BackgroundCheckBox"></CheckBox>
+                    <TextBlock Text="Adjust background to time of day" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="17" FontWeight="SemiBold" Margin="0,0,0,0" Padding="10" TextAlignment="Left"/>
+                </StackPanel>
+            </Grid>
+            
+            <Grid Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2">
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal" Margin="50,30,0,0">
+                    <CheckBox VerticalAlignment="Center" Margin="0,2.5,0,0" FontSize="15" VerticalContentAlignment="Center" IsChecked="True" Name="DescriptionCheckBox"></CheckBox>
+                    <TextBlock Text="Include description" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="17" FontWeight="SemiBold" Margin="0,0,0,0" Padding="10" TextAlignment="Left"/>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="2">
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal" Margin="50,15,0,0">
+                    <CheckBox VerticalAlignment="Center" Margin="0,2.5,0,0" FontSize="15" VerticalContentAlignment="Center" IsChecked="True" Name="NotificationsCheckBox"></CheckBox>
+                    <TextBlock Text="Send desktop notifications" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="17" FontWeight="SemiBold" Margin="0,0,0,0" Padding="10" TextAlignment="Left"/>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Row="3" Grid.Column="1" Grid.RowSpan="2" Margin="0,0,0,0">
+                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                    <TextBlock Text="Priority" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="17" FontWeight="SemiBold" Margin="0,0,0,0" Padding="35,0,0,10" TextAlignment="Left"/>
+                    <StackPanel HorizontalAlignment="Left" Margin="35,10,0,0" x:Name="RadioButtonStackPanel">
+                        <StackPanel.Resources>
+                            <Style TargetType="RadioButton">
+                                <Setter Property="Margin" Value="0,0,0,10"/>
+                            </Style>
+                        </StackPanel.Resources>
+                        
+                        <RadioButton FontSize="14" FontWeight="SemiBold" Uid="Urgent" Click="RadioButtonClicked">Urgent</RadioButton>
+                        <RadioButton FontSize="14" FontWeight="SemiBold" Uid="Important" Click="RadioButtonClicked">Important</RadioButton>
+                        <RadioButton FontSize="14" FontWeight="SemiBold" IsChecked="True" Uid="Safe" Click="RadioButtonClicked">Safe</RadioButton>
+                        <RadioButton FontSize="14" FontWeight="SemiBold" Uid="None" Click="RadioButtonClicked">None</RadioButton>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Row="5" Grid.Column="2" Grid.RowSpan="3">
+                <TextBlock Text="Reminder preview" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="17" FontWeight="SemiBold" Margin="0,25,0,0" Padding="10" TextAlignment="Left"/>
+                <Grid Margin="0,50,0,0">
+                    <Border Background="White" BorderBrush="#bbb" BorderThickness="1.5" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Height="115" Width="250" x:Name="ReminderBorder">
+                        <StackPanel VerticalAlignment="Center" x:Name="ReminderStackPanel">
+                            <Label Style="{DynamicResource LabelStyleUC1}" x:Name="ReminderPreviewTitle" Foreground="Black" HorizontalAlignment="Center"  VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10" FontSize="16" FontWeight="SemiBold"/>
+                            <Label Style="{DynamicResource LabelStyleUC1}" x:Name="ReminderDateTimeFormat" Foreground="Black"  HorizontalAlignment="Center"  VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10" FontSize="16"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="40,0,40,0">
+            <Grid  Margin="60,0,0,0" >
+                <StackPanel Orientation="Horizontal">
+                    <Button  Style="{DynamicResource ImageButton}" Height="50" Width="130" Foreground="White" Content="Cancel" FontSize="16.5" FontWeight="SemiBold"/>
+                    <Button  Style="{DynamicResource ImageButton}" Height="50" Width="130" Foreground="White" Content="Create" FontSize="16.5" FontWeight="SemiBold" Click="CreateReminder"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+
+</UserControl>

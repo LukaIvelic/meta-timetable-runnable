@@ -1,0 +1,334 @@
+﻿<Window x:Class="Meta.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Meta.View"
+        mc:Ignorable="d" WindowStyle="None"
+        Title="Meta Timetable" 
+        FontFamily="{StaticResource QuickSand}" Background="Transparent"
+        ResizeMode="NoResize" AllowsTransparency="True" Loaded="StrartBackgroundProcess">
+
+    <!--#region Window Resources-->
+    <Window.Resources>
+        <!--#region Window Button-->
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="Transparent"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#eef"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#eef"/>
+
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#eef"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#eef"/>
+
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+
+        <Style x:Key="WindowButtons" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="55"/>
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush }" BorderThickness="0" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--#endregion-->
+        <!--#region Sidebar buttons-->
+        <SolidColorBrush x:Key="SidebarButton.Static.Background" Color="Transparent"/>
+        <SolidColorBrush x:Key="SidebarButton.Static.Border" Color="Transparent"/>
+
+        <SolidColorBrush x:Key="SidebarButton.MouseOver.Background" Color="#4b4b4b"/>
+        <SolidColorBrush x:Key="SidebarButton.MouseOver.Border" Color="#2b2b2b"/>
+
+        <SolidColorBrush x:Key="SidebarButton.Pressed.Background" Color="#1f1f1f"/>
+        <SolidColorBrush x:Key="SidebarButton.Pressed.Border" Color="#1f1f1f"/>
+        <SolidColorBrush x:Key="SidebarButton.Pressed.Foreground" Color="#FFFFFF"/>
+
+        <SolidColorBrush x:Key="SidebarButton.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="SidebarButton.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="SidebarButton.Disabled.Foreground" Color="White"/>
+
+        <Style x:Key="Sidebar_buttons" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource SidebarButton.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource SidebarButton.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="7"/>
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush }" BorderThickness="0.15" CornerRadius="5" SnapsToDevicePixels="true">
+                            <WrapPanel>
+                                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                <TextBlock Foreground="{StaticResource SidebarButton.Pressed.Foreground}"/>
+                            </WrapPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource SidebarButton.MouseOver.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource SidebarButton.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Opacity" TargetName="border" Value="1"/>
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource SidebarButton.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource SidebarButton.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource SidebarButton.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource SidebarButton.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource SidebarButton.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--#endregion-->
+    </Window.Resources>
+    <!--#endregion-->
+
+    <Grid>
+        <!--#region Grid Definitions-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <!--#endregion-->
+
+        <!--#region Window Border-->
+        <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="5" BorderBrush="#aaa" Panel.ZIndex="10"  BorderThickness="0.25" CornerRadius="0" Name="WindowBorder"/>
+        <!--#endregion-->
+        
+        <!--#region Grid for DragMove()-->
+        <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" x:Name="DragGrid" Panel.ZIndex="1" Height="30" PreviewMouseDown="Drag">
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="Opacity" Value="0"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Cursor" Value="Arrow"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+        </Grid>
+        <!--#endregion-->
+
+        <!--#region Sidebar color border-->
+        <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Grid.ColumnSpan="2" CornerRadius="0">
+            <Border.Background>
+                <SolidColorBrush Color="Black" Opacity="0.35" x:Name="NavigationPanel"/>
+            </Border.Background>
+        </Border>
+        <!--#endregion-->
+
+        <!--#region Main grid color border-->
+        <Border Background="{Binding BackgroundColor}" Grid.Column="1" Grid.Row="0" Grid.RowSpan="4" Grid.ColumnSpan="4" CornerRadius="0"></Border>
+        <!--#endregion-->
+
+        <!--#region Toolbar-->
+        <Grid Grid.Row="0" Grid.Column="1" Margin="2" Panel.ZIndex="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="4" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="-2">
+                <Button Style="{DynamicResource WindowButtons}" Content="–" Padding="0,0,0,2.5" PreviewMouseDown="Minimize" Name="MinimizeButtn"></Button>
+                <Button Style="{DynamicResource WindowButtons}" Content="🗖" FontSize="13" Padding="0,0,0,2" PreviewMouseDown="Maximize" Name="MaximizeButtn"></Button>
+                <Button Style="{DynamicResource WindowButtons}" Content="✕" FontSize="13" PreviewMouseDown="Shutdown" Name="ShutdownButton"></Button>
+            </StackPanel>
+
+            <TextBlock Grid.Column="2" Text="{Binding WindowName}" FontSize="15" FontWeight="SemiBold" Margin="0,5,0,0" PreviewMouseDown="Drag" Name="MetaWindowName"/>
+        </Grid>
+        <!--#endregion-->
+
+        <!--#region Sidebar grid-->
+        <Grid Grid.Row="1" Grid.Column="0">
+            <TextBlock Text="" x:Name="TimeNow" TextAlignment="Center" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20" Foreground="#FFFFFF"/>
+            
+            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,0,0,0" Orientation="Vertical" x:Name="SidebarOptionsStackPanel">
+                <StackPanel.Resources>
+                    <Style TargetType="Grid">
+                        <Setter Property="Margin" Value="0,0,0,15"/>
+                    </Style>
+                    <Style TargetType="Path">
+                        <Setter Property="Margin" Value="0,15,0,0"/>
+                    </Style>
+                </StackPanel.Resources>
+
+                <Grid>
+                    <Button Width="300" Style="{DynamicResource Sidebar_buttons}" HorizontalAlignment="Left" Margin="20,0,0,0" x:Uid="1" PreviewMouseDown="TurnToPageModel">
+                        <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="15,0,0,0">
+                            <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Name="CreateReminderIcon" >
+                                <Path Data="M8 4H5C3.89543 4 3 4.89543 3 6V9M8 4H16M8 4V2M8 4V6M16 4H19C20.1046 4 21 4.89543 21 6V9H3M16 4V2M16 4V6M3 9V20C3 21.1046 3.89543 22 5 22H10M17 15.25V17L18.25 
+                                            18.25M22 17C22 19.7614 19.7614 22 17 22C14.2386 22 12 19.7614 12 17C12 14.2386 14.2386 12 17 12C19.7614 12 22 14.2386 22 17Z" Stroke="White" StrokeThickness="2" StrokeLineJoin="Round" StrokeStartLineCap="Round"/>
+                            </Grid>
+                            <TextBlock Text="Create reminder" TextAlignment="Center" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFFFFF" Margin="15,0,0,0"/>
+                        </WrapPanel>
+                    </Button>
+                </Grid>
+
+                <Grid>
+                    <Button Width="300" Style="{DynamicResource Sidebar_buttons}" HorizontalAlignment="Left" Margin="20,0,0,0" x:Uid="2" PreviewMouseDown="TurnToPageModel">
+                        <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="15,0,0,0">
+                            <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Name="CreatePlanIcon">
+                                <Path Data="M3 6C3 4.89543 3.89543 4 5 4H19C20.1046 4 21 4.89543 21 6V20C21 21.1046 20.1046 22 19 22H5C3.89543 22 3 21.1046 3 20V6Z" Stroke="White" StrokeThickness="2" StrokeLineJoin="Round" StrokeStartLineCap="Round"/>
+                                <Path Data="M3 10H21" Stroke="White" StrokeThickness="2" StrokeLineJoin="Round" StrokeStartLineCap="Round"/>
+                                <Path Data="M16 2V6" Stroke="White" StrokeThickness="2" StrokeLineJoin="Round" StrokeStartLineCap="Round"/>
+                                <Path Data="M8 2V6" Stroke="White" StrokeThickness="2" StrokeLineJoin="Round" StrokeStartLineCap="Round"/>
+                            </Grid>
+                            <TextBlock Text="Create plan" TextAlignment="Center" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFFFFF" Margin="15,0,0,0"/>
+                        </WrapPanel>
+                    </Button>
+                </Grid>
+
+                <Grid Height="65">
+                    <Button Width="300"  Style="{DynamicResource Sidebar_buttons}" HorizontalAlignment="Left" Margin="20,0,0,0" x:Uid="3" PreviewMouseDown="TurnToPageModel">
+                        <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,10,0,0">
+                            <Grid Name="ReminderListIcon">
+                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <Rectangle Width="11" Height="6" Stroke="White" Margin="3,0,3,2"></Rectangle>
+                                    <Rectangle Width="17" Height="6" Stroke="White" Margin="17,2,3,0"></Rectangle>
+                                    <Rectangle Width="13" Height="6" Stroke="White" Margin="1,3,3,0"></Rectangle>
+                                </StackPanel>
+                            </Grid>
+                            <TextBlock Text="Reminder list" TextAlignment="Center" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFFFFF" Margin="9,0,0,0"/>
+                        </WrapPanel>
+                    </Button>
+                </Grid>
+
+                <Grid>
+                    <Button Width="300"  Style="{DynamicResource Sidebar_buttons}" HorizontalAlignment="Left" Margin="15,0,0,0" x:Uid="4" PreviewMouseDown="TurnToPageModel">
+                        <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="18,0,0,0">
+                            <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Name="PlanListIcon">
+                                <Path Data="M4 4.5C4 3.11929 5.11929 2 6.5 2H20V22H6.5C5.11929 22 4 20.8807 4 19.5V4.5Z" Stroke="White" StrokeThickness="1.5" StrokeStartLineCap="Round" StrokeLineJoin="Round"></Path>
+                                <Path Data="M4 19.5V19.5C4 18.1193 5.11928 17 6.49998 17H20" Stroke="White" StrokeThickness="1.5" StrokeStartLineCap="Round" StrokeLineJoin="Round"></Path>
+                            </Grid>
+                            <TextBlock Text="Plan list" TextAlignment="Center" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFFFFF" Margin="17,0,0,0"/>
+                        </WrapPanel>
+                    </Button>
+                </Grid>
+
+                <Grid>
+                    <Button Width="300" Style="{DynamicResource Sidebar_buttons}" HorizontalAlignment="Left" Margin="20,0,0,0" x:Uid="5" PreviewMouseDown="TurnToPageModel">
+                        <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="15,0,0,0">
+                            <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Name="SettingsIcon">
+                                <Path Data="M10.0761 3.16311C10.136 2.50438 10.6883 2 11.3497 2H12.6503C13.3117 2 13.864 2.50438 13.9239 3.16311C13.9731 3.70392 14.3623 4.14543 
+                                        14.8708 4.336C15.0015 4.38499 15.1307 4.43724 15.2582 4.49263C15.7613 4.71129 16.3531 4.66938 16.7745 4.31818C17.2953 3.8842 18.0611 
+                                        3.91894 18.5404 4.39829L19.4584 5.31623C19.9154 5.77326 19.9485 6.50338 19.5347 6.99992C19.1901 7.41349 19.158 7.99745 19.3897 8.48341C19.49 
+                                        8.69386 19.5816 8.90926 19.664 9.12916C19.8546 9.63767 20.2961 10.0269 20.8369 10.0761C21.4956 10.136 22 10.6883 22 11.3497V12.6503C22 13.3117 
+                                        21.4956 13.864 20.8369 13.9239C20.2961 13.9731 19.8546 14.3623 19.664 14.8708C19.59 15.0682 19.5086 15.262 19.4202 15.4518C19.2053 15.913 19.2401 
+                                        16.4637 19.5658 16.8546C19.962 17.33 19.9303 18.0291 19.4927 18.4667L18.4667 19.4927C18.0291 19.9303 17.33 19.962 16.8546 19.5658C16.4637 19.2401 
+                                        15.913 19.2053 15.4518 19.4202C15.262 19.5086 15.0682 19.59 14.8708 19.664C14.3623 19.8546 13.9731 20.2961 13.9239 20.8369C13.864 21.4956 13.3117 
+                                        22 12.6503 22H11.3497C10.6883 22 10.136 21.4956 10.0761 20.8369C10.0269 20.2961 9.63767 19.8546 9.12917 19.664C8.90927 19.5816 8.69387 19.49 8.48343 
+                                        19.3897C7.99746 19.158 7.4135 19.1901 6.99992 19.5347C6.50338 19.9485 5.77325 19.9154 5.31622 19.4584L4.39829 18.5404C3.91893 18.0611 3.8842 17.2953 
+                                        4.31818 16.7745C4.66939 16.3531 4.71129 15.7613 4.49263 15.2582C4.43724 15.1307 4.385 15.0016 4.336 14.8708C4.14544 14.3623 3.70392 13.9731 3.16311 
+                                        13.9239C2.50438 13.864 2 13.3117 2 12.6503V11.3497C2 10.6883 2.50438 10.136 3.16311 10.0761C3.70393 10.0269 4.14544 9.63768 4.33601 9.12917C4.3936 
+                                        8.9755 4.45568 8.82402 4.52209 8.67489C4.7571 8.14716 4.71804 7.52257 4.34821 7.07877C3.89722 6.53758 3.93332 5.74179 4.43145 5.24365L5.24364 4.43146C5.74178 
+                                        3.93332 6.53757 3.89722 7.07876 4.34822C7.52256 4.71805 8.14715 4.7571 8.67488 4.52209C8.82401 4.45568 8.97549 4.3936 9.12916 4.33601C9.63767 4.14544 10.0269 
+                                        3.70393 10.0761 3.16311Z"
+                                  Stroke="White" StrokeThickness="2" StrokeLineJoin="Round" StrokeStartLineCap="Round"/>
+
+                                <Path Data="M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z" Stroke="White" StrokeThickness="2" StrokeLineJoin="Round" StrokeStartLineCap="Round"/>
+                            </Grid>
+                            <TextBlock Text="Settings" TextAlignment="Center" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFFFFF" Margin="15,0,0,0"/>
+                        </WrapPanel>
+                    </Button>
+                </Grid>
+
+                <Grid>
+                    <Button Width="300" Style="{DynamicResource Sidebar_buttons}" HorizontalAlignment="Left" Margin="20,0,0,0" x:Uid="6" PreviewMouseDown="TurnToPageModel">
+                        <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="15,0,0,0">
+                            <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Name="CustomizeIcon">
+                                <Path Data="M4.5 13.5L14.5 3.5C15.3284 2.67157 16.6716 2.67157 17.5 3.5C18.3284 4.32843 18.3284 5.67157 17.5 6.5L7.5 16.5L3.5 17.5L4.5 13.5Z"
+                                  Stroke="White" StrokeThickness="2" StrokeLineJoin="Round" StrokeStartLineCap="Round"/>
+                            </Grid>
+                            <TextBlock Text="Customize" TextAlignment="Center" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFFFFF" Margin="15,0,0,0"/>
+                        </WrapPanel>
+                    </Button>
+                </Grid>
+
+
+            </StackPanel>
+        </Grid>
+        <!--#endregion-->
+
+        <Grid Grid.Column="1" Grid.Row="1">
+            <ContentControl Name="ContentControlElement"/>
+        </Grid>
+
+        <Rectangle x:Name="CustomResizeGrip" Width="16" Height="16" Grid.Column="2" Grid.Row="2" Fill="Transparent"
+           HorizontalAlignment="Right"
+           VerticalAlignment="Bottom"
+           Cursor="SizeNWSE"
+           PreviewMouseLeftButtonDown="CustomResizeGrip_MouseLeftButtonDown"
+           PreviewMouseLeftButtonUp="CustomResizeGrip_MouseLeftButtonUp" 
+           PreviewMouseMove="Window_MouseMove"/>
+    </Grid>
+</Window>

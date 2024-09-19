@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>pngegg.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Font\Quicksand.ttf" />
+    <None Remove="Image\Image %280%29.png" />
+    <None Remove="Image\Image %281%29.png" />
+    <None Remove="Image\Image %282%29.png" />
+    <None Remove="Image\Image %283%29.png" />
+    <None Remove="Image\Image %284%29.png" />
+    <None Remove="Image\Image %285%29.png" />
+    <None Remove="Image\Image %286%29.png" />
+    <None Remove="Image\Image %287%29.png" />
+    <None Remove="Image\Image %288%29.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="pngegg.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Caliburn.Micro" Version="4.0.212" />
+    <PackageReference Include="Caliburn.Micro.Core" Version="4.0.212" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    <PackageReference Include="NodaTime" Version="3.1.6" />
+    <PackageReference Include="WeatherNet" Version="2.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Font\Quicksand.ttf" />
+    <Resource Include="Image\Image (0).png" />
+    <Resource Include="Image\Image (1).png" />
+    <Resource Include="Image\Image (2).png" />
+    <Resource Include="Image\Image (3).png" />
+    <Resource Include="Image\Image (4).png" />
+    <Resource Include="Image\Image (5).png" />
+    <Resource Include="Image\Image (6).png" />
+    <Resource Include="Image\Image (7).png" />
+    <Resource Include="Image\Image (8).png" />
+  </ItemGroup>
+
+</Project>

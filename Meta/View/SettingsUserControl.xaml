@@ -1,0 +1,209 @@
+﻿<UserControl x:Class="Meta.View.UserControl5"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Meta.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid Background="White" Margin="50">
+        <TextBlock Text="Settings" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="25" FontWeight="SemiBold"/>
+
+        <Grid Margin="0,80,10,50">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <StackPanel>
+                    <StackPanel.Resources>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Margin" Value="0,0,0,30"/>
+                        </Style>
+                    </StackPanel.Resources>
+
+
+                    <!--Language select-->
+                    <StackPanel>
+                        <TextBlock Text="Language" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="20" FontWeight="SemiBold"/>
+                        <StackPanel Margin="5,10,0,0">
+                            <StackPanel.Resources>
+                                <Style TargetType="RadioButton">
+                                    <Setter Property="Margin" Value="0,0,0,5"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <RadioButton Content="Hrvatski" VerticalContentAlignment="Center" FontSize="15" FontWeight="SemiBold" Name="language_hrv" Click="ChangeSettings"/>
+                            <RadioButton Content="English" VerticalContentAlignment="Center" FontSize="15" FontWeight="SemiBold" IsChecked="True" Name="language_eng" Click="ChangeSettings"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!--Time select-->
+                    <StackPanel>
+                        <TextBlock Text="Time Format" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="20" FontWeight="SemiBold"/>
+                        <StackPanel Margin="5,10,0,0">
+                            <StackPanel.Resources>
+                                <Style TargetType="RadioButton">
+                                    <Setter Property="Margin" Value="0,0,0,5"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <RadioButton Content="24 hour format" VerticalContentAlignment="Center" FontSize="15" FontWeight="SemiBold" IsChecked="True" Name="timeformat_24" Click="ChangeSettings"/>
+                            <RadioButton Content="12 hour format" VerticalContentAlignment="Center" FontSize="15" FontWeight="SemiBold" Name="timeformat_12" Click="ChangeSettings"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!--Maximize select-->
+                    <StackPanel>
+                        <TextBlock Text="Maximize Control Button" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="20" FontWeight="SemiBold"/>
+                        <StackPanel Margin="5,10,0,0">
+                            <StackPanel.Resources>
+                                <Style TargetType="RadioButton">
+                                    <Setter Property="Margin" Value="0,0,0,5"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <RadioButton Content="Enabled" VerticalContentAlignment="Center" FontSize="15" FontWeight="SemiBold" Name="maximize_enable" Click="ChangeSettings"/>
+                            <RadioButton Content="Disabled" VerticalContentAlignment="Center" FontSize="15" FontWeight="SemiBold" IsChecked="True" Name="maximize_disable" Click="ChangeSettings"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!--Font Multiplier select-->
+                    <StackPanel>
+                        <TextBlock Text="Event Logger" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="20" FontWeight="SemiBold"/>
+                        <StackPanel Margin="5,10,0,0">
+                            <StackPanel.Resources>
+                                <Style TargetType="RadioButton">
+                                    <Setter Property="Margin" Value="0,0,0,5"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <RadioButton Content="Enabled" VerticalContentAlignment="Center" FontSize="15" FontWeight="SemiBold" IsChecked="True" Name="event_enable" Click="ChangeSettings"/>
+                            <RadioButton Content="Disabled" VerticalContentAlignment="Center" FontSize="15" FontWeight="SemiBold" Name="event_disable" Click="ChangeSettings"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!--Font Multiplier select-->
+                    <StackPanel>
+                        <TextBlock Text="Error Logger" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="20" FontWeight="SemiBold"/>
+                        <StackPanel Margin="5,10,0,0">
+                            <StackPanel.Resources>
+                                <Style TargetType="RadioButton">
+                                    <Setter Property="Margin" Value="0,0,0,5"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <RadioButton Content="Enabled" VerticalContentAlignment="Center" FontSize="15" FontWeight="SemiBold" IsChecked="True" Name="error_enable" Click="ChangeSettings"/>
+                            <RadioButton Content="Disabled" VerticalContentAlignment="Center" FontSize="15" FontWeight="SemiBold" Name="error_disable" Click="ChangeSettings"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Column="1" Margin="-15,0,0,0">
+                <StackPanel>
+                    <StackPanel.Resources>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Margin" Value="0,0,0,30"/>
+                        </Style>
+                    </StackPanel.Resources>
+
+
+                    <!--Window size scale select-->
+                    <StackPanel>
+                        <TextBlock Text="Default Window Size" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="20" FontWeight="SemiBold"/>
+                        <ComboBox Width="200" HorizontalAlignment="Left" Margin="0,10,0,25">
+                            <ComboBoxItem Content="900px x 1800px" Name="Cb1" Selected="ComboBoxItemClicked"/>
+                            <ComboBoxItem Content="825px x 1650px" Name="Cb2" Selected="ComboBoxItemClicked"/>
+                            <ComboBoxItem Content="700px x 1400px" Name="Cb3" Selected="ComboBoxItemClicked"/>
+                            <ComboBoxItem Content="600px x 1200px" Name="Cb4" Selected="ComboBoxItemClicked"/>
+                            <ComboBoxItem Content="400px x 800px" Name="Cb5" Selected="ComboBoxItemClicked"/>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <!--Time select-->
+                    <StackPanel>
+                        <TextBlock Text="Display day in navigation panel" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="20" FontWeight="SemiBold"/>
+                        <StackPanel Margin="5,10,0,0">
+                            <StackPanel.Resources>
+                                <Style TargetType="RadioButton">
+                                    <Setter Property="Margin" Value="0,0,0,5"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <RadioButton Content="Display" VerticalContentAlignment="Center" FontSize="15" FontWeight="SemiBold" IsChecked="True" Name="day_enable" Click="ChangeSettings"/>
+                            <RadioButton Content="Hide" VerticalContentAlignment="Center" FontSize="15" FontWeight="SemiBold" Name="day_disable" Click="ChangeSettings"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!--Maximize select-->
+                    <StackPanel>
+                        <TextBlock Text="Display time in navigation panel" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="20" FontWeight="SemiBold"/>
+                        <StackPanel Margin="5,10,0,0">
+                            <StackPanel.Resources>
+                                <Style TargetType="RadioButton">
+                                    <Setter Property="Margin" Value="0,0,0,5"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <RadioButton Content="Display" VerticalContentAlignment="Center" FontSize="15" FontWeight="SemiBold" IsChecked="True" Name="time_enable" Click="ChangeSettings"/>
+                            <RadioButton Content="Hide" VerticalContentAlignment="Center" FontSize="15" FontWeight="SemiBold" Name="time_disable" Click="ChangeSettings"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!--Font Multiplier select-->
+                    <StackPanel>
+                        <TextBlock Text="Ask before deleting plans/reminders" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="20" FontWeight="SemiBold"/>
+                        <StackPanel Margin="5,10,0,0">
+                            <StackPanel.Resources>
+                                <Style TargetType="RadioButton">
+                                    <Setter Property="Margin" Value="0,0,0,5"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <RadioButton Content="Ask" VerticalContentAlignment="Center" FontSize="15" FontWeight="SemiBold" IsChecked="True" Name="deleting_enable" Click="ChangeSettings"/>
+                            <RadioButton Content="Don't" VerticalContentAlignment="Center" FontSize="15" FontWeight="SemiBold" Name="deleting_disable" Click="ChangeSettings"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!--Font Multiplier select-->
+                    <StackPanel>
+                        <TextBlock Text="Zen mode" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="20" FontWeight="SemiBold"/>
+                        <StackPanel Margin="5,10,0,0">
+                            <StackPanel.Resources>
+                                <Style TargetType="RadioButton">
+                                    <Setter Property="Margin" Value="0,0,0,5"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <RadioButton Content="Enabled" VerticalContentAlignment="Center" FontSize="15" FontWeight="SemiBold" Name="zen_enable" Click="ChangeSettings"/>
+                            <RadioButton Content="Disabled" VerticalContentAlignment="Center" FontSize="15" FontWeight="SemiBold" IsChecked="True" Name="zen_disable" Click="ChangeSettings"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Column="2">
+                <StackPanel>
+                    <StackPanel.Resources>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Margin" Value="0,0,0,30"/>
+                        </Style>
+                    </StackPanel.Resources>
+
+
+                    <!--Language select-->
+                    <StackPanel>
+                        <TextBlock Text="Start minimized" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="20" FontWeight="SemiBold"/>
+                        <StackPanel Margin="5,10,0,0">
+                            <StackPanel.Resources>
+                                <Style TargetType="RadioButton">
+                                    <Setter Property="Margin" Value="0,0,0,5"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <RadioButton Content="Yes" VerticalContentAlignment="Center" FontSize="15" FontWeight="SemiBold" Name="minimize_enable" Click="ChangeSettings"/>
+                            <RadioButton Content="No" VerticalContentAlignment="Center" FontSize="15" FontWeight="SemiBold" IsChecked="True" Name="minimize_disable" Click="ChangeSettings"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+    
+    
+</UserControl>
